@@ -32,6 +32,12 @@
             android:layout_height="130dip"
             android:layout_weight="1"/>
 
+        <ImageButton
+            android:id="@+id/card4"
+            android:layout_width="match_parent"
+            android:layout_height="130dip"
+            android:layout_weight="1"/>
+
 
     </LinearLayout>
 
@@ -39,12 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/card4"
-            android:layout_width="match_parent"
-            android:layout_height="130dip"
-            android:layout_weight="1"/>
 
         <ImageButton
             android:id="@+id/card5"
@@ -58,14 +58,6 @@
             android:layout_height="130dip"
             android:layout_weight="1"/>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
         <ImageButton
             android:id="@+id/card7"
             android:layout_width="match_parent"
@@ -78,8 +70,34 @@
             android:layout_height="130dip"
             android:layout_weight="1"/>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/card9"
+            android:layout_width="match_parent"
+            android:layout_height="130dip"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/card10"
+            android:layout_width="match_parent"
+            android:layout_height="130dip"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/card11"
+            android:layout_width="match_parent"
+            android:layout_height="130dip"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/card12"
             android:layout_width="match_parent"
             android:layout_height="130dip"
             android:layout_weight="1"/>
@@ -98,6 +116,7 @@
          android:layout_marginTop="2dp"
          android:text="Restart"
          android:layout_weight="1"/>
+
 
     </LinearLayout>
 

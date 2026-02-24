@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     var goodCardsFlipped = 0
     var gameFinished = false
 
+    var master = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,10 +41,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     }
 
+    fun vib(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            // Si la versión del sistema operativo instalado en el teléfono es igual o mayor a Android 12 (API 31)
+            val vibratorAdmin= applicationContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            val vibrator= vibratorAdmin.defaultVibrator
+            vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE))
+        }else{
+            val vibrator = applicationContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(1500)
+        }
+    }
     fun start() {
         goodCardsFlipped = 0
         gameFinished = false
-        for (i in 1..9) {
+        for (i in 1..12) {
             val btnCard = findViewById<View>(
                 resources.getIdentifier("card$i", "id", this.packageName)
 
@@ -52,9 +65,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             btnCard.setBackgroundResource(R.drawable.cheems_question)
         }
 
-        gameOverCard =(1..9).random()
+        gameOverCard =(1..12).random()
 
         Log.d("Valor de la carta perdedora", "La carta perdedora es ${gameOverCard.toString()}")
+
+        master =(1..12).random()
+
+        Log.d("Valor de la carta master", "La carta master es ${master.toString()}")
+
+        Toast.makeText(this,
+            getString(R.string.Welcome),
+            Toast.LENGTH_LONG).show()
+
+
 
     }
 
@@ -68,23 +91,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
         btnCard.isEnabled = false
 
+
+
         if(card == gameOverCard){
 
             gameFinished = true
+            vib()
 
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-                // Si la versión del sistema operativo instalado en el teléfono es igual o mayor a Android 12 (API 31)
-                val vibratorAdmin= applicationContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-                val vibrator= vibratorAdmin.defaultVibrator
-                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE))
-            }else{
-                val vibrator = applicationContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(1500)
-            }
             Toast.makeText(this, "Perdiste :( Intenta otra vez",
                 Toast.LENGTH_LONG).show()
 
-            for(i in 1..9) {
+            for(i in 1..12) {
                 val btnCard = findViewById<View>(
                     resources.getIdentifier("card$i", "id", this.packageName)
                 ) as ImageButton
@@ -94,23 +111,54 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
                 if(i ==card){
                     btnCard.setBackgroundResource(R.drawable.cheems_bad)
+                } else if(i == master) {
+                    btnCard.setBackgroundResource(R.drawable.cheems_master)
                 } else {
                     btnCard.setBackgroundResource(R.drawable.cheems_ok)
                 }
             }
+        }   else if(card == master){
+            gameFinished = true
+            vib()
+
+            Toast.makeText(this,
+                getString(R.string.MasterWin),
+                Toast.LENGTH_LONG).show()
+
+            for(i in 1..12) {
+                val btnCard = findViewById<View>(
+                    resources.getIdentifier("card$i", "id", this.packageName)
+                ) as ImageButton
+
+
+                btnCard.isEnabled = false
+
+                if(i ==card){
+                    btnCard.setBackgroundResource(R.drawable.cheems_master)
+                } else if (i == gameOverCard){
+                    btnCard.setBackgroundResource(R.drawable.cheems_bad)
+                } else {
+                    btnCard.setBackgroundResource(R.drawable.cheems_ok)
+                }
+            }
+
+
         } else {
 
             btnCard.setBackgroundResource(R.drawable.cheems_ok)
             goodCardsFlipped++
 
 
-            if (goodCardsFlipped == 8) {
+            if (goodCardsFlipped == 11) {
 
                 gameFinished = true
+                vib()
 
                 Toast.makeText(this,
-                    " ¡Ganaste :D !!",
+                    getString(R.string.WIn),
                     Toast.LENGTH_LONG).show()
+
+
 
                 val losingCard = findViewById<View>(
                     resources.getIdentifier("card$gameOverCard", "id", this.packageName)
@@ -118,7 +166,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
                 losingCard.setBackgroundResource(R.drawable.cheems_bad)
                 losingCard.isEnabled = false
+
+                val masterCard = findViewById<View>(
+                    resources.getIdentifier("card$master", "id", this.packageName)
+                ) as ImageButton
+
+                masterCard.setBackgroundResource(R.drawable.cheems_master)
+                losingCard.isEnabled = false
             }
+
+
         }
     }
 
@@ -133,6 +190,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             R.id.card7 -> { flip(card = 7)}
             R.id.card8 -> { flip(card = 8)}
             R.id.card9 -> { flip(card = 9)}
+            R.id.card10 -> { flip(card = 10)}
+            R.id.card11 -> { flip(card = 11)}
+            R.id.card12 -> { flip(card = 12)}
             R.id.restart -> { start()}
         }
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cheems</string>
+    <string name="Welcome">Bienvenido al juego :D Seleccione sus cartas</string>
+    <string name="WIn">¡Ganaste :D !!</string>
+    <string name="MasterWin">Encontraste el cheems master, ganaste :D !!!!</string>
+    <string name="Lose">Perdiste :( Intenta otra vez</string>
+</resources>

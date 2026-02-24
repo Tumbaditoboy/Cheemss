@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cheems</string>
+    <string name="Welcome">Welcome to the game :D select your cards</string>
+    <string name="WIn">You won :D !!</string>
+    <string name="MasterWin">You found the master cheems :D You won!!</string>
+    <string name="Lose">You Lose :( Try Again</string>
+
 </resources>
