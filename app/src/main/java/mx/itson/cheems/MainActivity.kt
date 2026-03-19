@@ -2,6 +2,7 @@ package mx.itson.cheems
 
 import android.R.attr.button
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -16,6 +17,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import mx.itson.cheems.entities.Winner
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     var gameFinished = false
 
     var master = 0
+
+    val REQUEST_WINNER = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +39,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             insets
         }
 
+
+
         val btnRestart = findViewById<Button>(R.id.restart)
         btnRestart.setOnClickListener(this)
+
+     //   Winner().save(this, "Pedro Robles","pedrin" )
+      //  Winner().getAll(this)
         start()
+
+        val btnNewWinner = findViewById<View>(R.id.btn_new_winner) as Button
+        btnNewWinner.setOnClickListener(this)
+
+        val btnListWinner = findViewById<View>(R.id.btn_list_winner) as Button
+        btnListWinner.setOnClickListener(this)
 
     }
 
@@ -55,6 +70,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     fun start() {
         goodCardsFlipped = 0
         gameFinished = false
+
+        val btnWinner = findViewById<Button>(R.id.btn_new_winner)
+        val textWinner = findViewById<View>(R.id.text_win)
+
+        btnWinner.visibility = View.GONE
+        textWinner.visibility = View.GONE
+
         for (i in 1..12) {
             val btnCard = findViewById<View>(
                 resources.getIdentifier("card$i", "id", this.packageName)
@@ -72,6 +94,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         master =(1..12).random()
 
         Log.d("Valor de la carta master", "La carta master es ${master.toString()}")
+
+     /*   gameOverCard = (1..12).random()
+
+        do {
+            master = (1..12).random()
+        } while (master == gameOverCard) */
+
+
 
         Toast.makeText(this,
             getString(R.string.Welcome),
@@ -98,7 +128,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             gameFinished = true
             vib()
 
-            Toast.makeText(this, "Perdiste :( Intenta otra vez",
+            Toast.makeText(this, getString(R.string.Lose),
                 Toast.LENGTH_LONG).show()
 
             for(i in 1..12) {
@@ -124,6 +154,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             Toast.makeText(this,
                 getString(R.string.MasterWin),
                 Toast.LENGTH_LONG).show()
+
+            //
+            findViewById<Button>(R.id.btn_new_winner).visibility = View.VISIBLE
+            findViewById<View>(R.id.text_win).visibility = View.VISIBLE
 
             for(i in 1..12) {
                 val btnCard = findViewById<View>(
@@ -151,6 +185,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
             if (goodCardsFlipped == 11) {
 
+                //
+                findViewById<Button>(R.id.btn_new_winner).visibility = View.VISIBLE
+                findViewById<View>(R.id.text_win).visibility = View.VISIBLE
                 gameFinished = true
                 vib()
 
@@ -194,6 +231,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             R.id.card11 -> { flip(card = 11)}
             R.id.card12 -> { flip(card = 12)}
             R.id.restart -> { start()}
+            R.id.btn_new_winner -> {
+                val intentWinnerForm = Intent(this, WinnerFormActivity::class.java)
+                startActivityForResult(intentWinnerForm, REQUEST_WINNER)
+            }
+            R.id.btn_list_winner -> {
+                val intentWinnerList = Intent(this, WinnerListActivity::class.java)
+                startActivity(intentWinnerList)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_WINNER && resultCode == RESULT_OK){
+
+            val btnWinner = findViewById<Button>(R.id.btn_new_winner)
+            val textWinner = findViewById<View>(R.id.text_win)
+
+            btnWinner.visibility = View.GONE
+            textWinner.visibility = View.GONE
         }
     }
 

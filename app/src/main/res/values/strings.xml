@@ -4,5 +4,14 @@
     <string name="WIn">You won :D !!</string>
     <string name="MasterWin">You found the master cheems :D You won!!</string>
     <string name="Lose">You Lose :( Try Again</string>
+    <string name="form_name">Name:</string>
+    <string name="form_nickname">Nickname:</string>
+    <string name="btn_save">Save</string>
+    <string name="win_msg">Congratulatioonss</string>
+    <string name="win_btn">Save my victory</string>
+    <string name="restart_btn">Restart</string>
+    <string name="save_ok">Saved!</string>
+    <string name="save_err">Something went wrong</string>
+    <string name="win_list">Winners!</string>
 
 </resources>

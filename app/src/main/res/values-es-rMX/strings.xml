@@ -5,4 +5,13 @@
     <string name="WIn">¡Ganaste :D !!</string>
     <string name="MasterWin">Encontraste el cheems master, ganaste :D !!!!</string>
     <string name="Lose">Perdiste :( Intenta otra vez</string>
+    <string name="form_name">Nombre:</string>
+    <string name="form_nickname">Apodo:</string>
+    <string name="btn_save">Guardar</string>
+    <string name="win_msg">Felicidades, ganaste la partida</string>
+    <string name="win_btn">Registrar mi victoria</string>
+    <string name="restart_btn">Reiniciar</string>
+    <string name="save_ok">Registro de datos exitoso</string>
+    <string name="save_err">Hubo un error en el registro de datos</string>
+    <string name="win_list">Ganadores</string>
 </resources>

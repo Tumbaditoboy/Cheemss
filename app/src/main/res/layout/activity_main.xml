@@ -114,10 +114,31 @@
          android:layout_width="match_parent"
          android:layout_height="80dip"
          android:layout_marginTop="2dp"
-         android:text="Restart"
+         android:text="@string/restart_btn"
          android:layout_weight="1"/>
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_win"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/win_msg"
+        android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_new_winner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/win_btn"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_list_winner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/win_list" />
 
 </LinearLayout>
